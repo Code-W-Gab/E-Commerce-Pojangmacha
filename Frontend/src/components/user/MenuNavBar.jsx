@@ -1,4 +1,4 @@
-import icon from '../../../public/favicon.svg'
+import icon from '/favicon.svg'
 
 export default function MenuNavBar() {
   const nav = [
