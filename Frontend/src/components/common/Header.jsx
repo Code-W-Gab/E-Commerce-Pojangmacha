@@ -16,7 +16,7 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-6">
-        <ShoppingBasket size={30} />
+        <NavLink to={"/Cart"}><ShoppingBasket size={30} /></NavLink>
         <button className="border px-6 py-1 rounded-3xl">Sign In</button>
       </div>
     </header>

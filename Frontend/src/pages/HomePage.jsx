@@ -1,6 +1,6 @@
 import Header from "../components/common/Header";
-import Menu from "../components/user/Menu";
-import MenuNavBar from "../components/user/MenuNavBar";
+import Menu from "../components/user/Home/Menu";
+import MenuNavBar from "../components/user/Home/MenuNavBar";
 
 export default function HomePage() {
   return(

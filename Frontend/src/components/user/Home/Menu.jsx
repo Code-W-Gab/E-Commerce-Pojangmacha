@@ -9,7 +9,7 @@ export default function Menu() {
         <div className="bg-white shadow rounded-2xl">
           <div className="relative">
             <img src={bimbimbowl} className="h-50 w-full rounded-tl-2xl rounded-tr-2xl"/>
-            <div className="absolute bottom-4 right-3 bg-white rounded-full p-0.5"><Plus size={22}/></div>
+            <div className="absolute bottom-4 right-3 bg-white rounded-full p-0.5 border border-white hover:border hover:border-red-500"><Plus size={22}/></div>
           </div>
           <div className="py-4 px-4">
             <h2 className="font-bold">Butter Noodles</h2>
