@@ -1,0 +1,22 @@
+export default function Total() {
+  return(
+    <main className="w-100">
+      <h1 className="font-bold text-xl">Cart Totals</h1>
+      <div className="flex flex-col gap-2 my-3">
+        <div className="flex justify-between border-b pb-1 border-gray-300">
+          <p>Subtotal</p>
+          <p>60pesos</p>
+        </div>
+        <div className="flex justify-between border-b pb-1 border-gray-300">
+          <p>Delivery Fee</p>
+          <p>20pesos</p>
+        </div>
+        <div className="flex justify-between ">
+          <p>Total</p>
+          <p>80pesos</p>
+        </div>
+      </div>
+      <button className="bg-orange-500 text-white px-10 py-1.5 rounded-sm mt-4">Proceed to Checkout</button>
+    </main>
+  )
+}
