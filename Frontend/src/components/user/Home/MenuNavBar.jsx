@@ -18,7 +18,7 @@ export default function MenuNavBar() {
       <div className='flex items-center gap-14'>
         {nav.map((n) => {
           return(
-            <div className='text-center'>
+            <div className='text-center' key={n.title}>
               <div className='bg-red-500 p-2 rounded-full mb-2'>
                <img src={n.image}/>
               </div>
