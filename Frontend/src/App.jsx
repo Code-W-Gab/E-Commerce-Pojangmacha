@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import HomePage from "./components/user/HomePage";
-import MenuPage from "./components/user/MenuPage";
-import ContactPage from "./components/user/ContactPage";
+import HomePage from "./pages/HomePage"
+import MenuPage from "./pages/MenuPage"
+import ContactPage from "./pages/ContactPage"
+
 
 export default function App() {
   return(

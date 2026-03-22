@@ -1,3 +1,4 @@
+
 import icon from '/favicon.svg'
 
 export default function MenuNavBar() {
