@@ -1,4 +1,3 @@
-import icon from '/favicon.svg'
 import combo from '/navbar/combo.jpg'
 import drink from '/navbar/drink.jpg'
 import noodles from '/navbar/Noodles.jpg'

@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage"
 import MenuPage from "./pages/MenuPage"
 import ContactPage from "./pages/ContactPage"
 import CartPage from "./pages/CartPage"
+import AdminPage from "./pages/AdminPage"
 
 
 export default function App() {
@@ -14,6 +15,8 @@ export default function App() {
         <Route path="/Menu" element={<MenuPage/>}/>
         <Route path="/Contacts" element={<ContactPage/>}/>
         <Route path="/Cart" element={<CartPage/>}/>
+
+        <Route path="/Admin" element={<AdminPage/>}/>
       </Routes>
     </main>
   )
