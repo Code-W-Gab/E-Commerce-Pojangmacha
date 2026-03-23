@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import FoodList from "./FoodList";
 
 export default function Food() {
   return(
@@ -10,6 +11,7 @@ export default function Food() {
           <span>Add Food</span>
         </button>
       </div>
+      <FoodList/>
     </main>
   )
 }
