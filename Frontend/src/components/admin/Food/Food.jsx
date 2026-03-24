@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import FoodList from "./FoodList";
 
-export default function Food() {
+export default function Food({ food }) {
   return(
     <main className="p-4">
       <div className="flex items-center justify-between">
@@ -11,7 +11,7 @@ export default function Food() {
           <span>Add Food</span>
         </button>
       </div>
-      <FoodList/>
+      <FoodList food={food}/>
     </main>
   )
 }

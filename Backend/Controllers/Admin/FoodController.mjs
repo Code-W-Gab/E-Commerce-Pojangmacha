@@ -9,6 +9,15 @@ const FoodController = {
     } catch (error) {
       next(error)
     }
+  },
+
+  async GetFood (req, res, next){
+    try {
+      const food = await FoodSchema.find()
+      res.status(200).json(food)
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

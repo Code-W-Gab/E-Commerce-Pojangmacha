@@ -1,7 +1,7 @@
 import noodles from '/navbar/Noodles.jpg';
 import { Trash2 } from 'lucide-react';
 
-export default function FoodList() {
+export default function FoodList({ food }) {
   return(
     <main className="mt-5">
       <h1 className="font-semibold text-lg mb-2">All Foods List</h1>
@@ -15,29 +15,23 @@ export default function FoodList() {
         <p>Action</p>
       </header>
 
-      <div className="grid grid-cols-4 items-center text-center border border-gray-500 border-t-0 px-4 py-1">
-        <div className="flex gap-20 items-center ">
-          <img src={noodles} className='size-10 rounded-sm'/>
-          <p>Ramen</p>
-        </div>
-        <p>Noodles</p>
-        <p>₱ 55</p>
-        <div className='flex justify-center'>
-          <Trash2 size={20} className='text-red-500'/>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-4 items-center text-center border border-gray-500 border-t-0 px-4 py-1">
-        <div className="flex gap-20 items-center ">
-          <img src={noodles} className='size-10 rounded-sm'/>
-          <p>Ramen</p>
-        </div>
-        <p>Noodles</p>
-        <p>₱ 55</p>
-        <div className='flex justify-center'>
-          <Trash2 size={20} className='text-red-500'/>
-        </div>
-      </div>
+      {
+        food.map((f) => {
+          return(
+            <div key={f._id} className="grid grid-cols-4 items-center text-center border border-gray-500 border-t-0 px-4 py-1">
+              <div className="flex gap-20 items-center ">
+                <img src={noodles} className='size-10 rounded-sm'/>
+                <p>{f.FoodName}</p>
+              </div>
+              <p>{f.Descriptions}</p>
+              <p>₱{f.Price}</p>
+              <div className='flex justify-center'>
+                <Trash2 size={20} className='text-red-500'/>
+              </div>
+            </div>
+          )
+        })
+      }
     </main>
   )
 }
