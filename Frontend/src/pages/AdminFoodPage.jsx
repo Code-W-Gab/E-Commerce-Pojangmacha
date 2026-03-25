@@ -23,7 +23,7 @@ export default function AdminFoodPage() {
       <SideBar/>
       <div className="w-full">
         <Header/>
-        <Food food={food}/>
+        <Food food={food} fetchFood={fetchFood}/>
       </div>
     </main>
   )

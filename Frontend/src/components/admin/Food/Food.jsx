@@ -3,7 +3,7 @@ import FoodList from "./FoodList";
 import { useState } from "react";
 import AddFood from "./AddFood";
 
-export default function Food({ food }) {
+export default function Food({ food, fetchFood }) {
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false);
 
   return(
@@ -22,7 +22,7 @@ export default function Food({ food }) {
       {isAddFoodOpen && (
         <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center z-40">
           <div className="bg-opacity-25 z-50">
-            <AddFood onClose={() => setIsAddFoodOpen(false)}/>
+            <AddFood onClose={() => setIsAddFoodOpen(false)} fetchFood={fetchFood}/>
           </div>
         </div>
       )}
