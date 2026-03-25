@@ -21,6 +21,7 @@ const foodSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			enum: ["KBowl", "Combo", "Noodles", "Drinks", "AddOns"],
+			default: "KBowl"
 		},
 		Image: {
 			type: String,

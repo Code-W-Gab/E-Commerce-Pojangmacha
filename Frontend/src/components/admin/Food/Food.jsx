@@ -16,7 +16,7 @@ export default function Food({ food, fetchFood }) {
             <span>Add Food</span>
           </button>
         </div>
-        <FoodList food={food}/>
+        <FoodList food={food} fetchFood={fetchFood}/>
       </main>
 
       {isAddFoodOpen && (

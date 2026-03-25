@@ -6,3 +6,5 @@ export const addFood = (formData) =>
   });
 
 export const GetFood = () => api.get("/api/food/getFood");
+
+export const deleteFood = (id) => api.delete(`/api/food/deleteFood/${id}`)
