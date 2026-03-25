@@ -33,6 +33,16 @@ const FoodController = {
       next(error);
     }
   },
+
+  async DeleteFood(req, res, next){
+    try {
+      const food = await FoodSchema.findByIdAndDelete(req.params.id);
+      if (!food) return res.status(404).json({ message: "Food not found"});
+      res.status(200).json({ message: "Food Successfully Deleted!"})
+    } catch (error) {
+      next(error)
+    }
+  }
 };
 
 export default FoodController;
