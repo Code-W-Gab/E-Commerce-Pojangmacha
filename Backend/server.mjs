@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import connectDB from './Config/db.mjs'
 import FoodRoutes from './Routes/FoodRoutes.mjs'
+import path from "path";
 
 const app = express()
 app.use(express.json())
@@ -19,7 +20,7 @@ connectDB()
 
 // Routes
 app.use('/api/food', FoodRoutes)
-// app.use('/api/user', userRoutes)
+app.use("/uploads", express.static(path.resolve("uploads")));
  
 
 // Global Error Handler

@@ -11,16 +11,26 @@ export default function AddFood({onClose, fetchFood}) {
   const [loading, setLoading] = useState(false);
 
   function handleAddFood() {
-    setLoading(true)
-    addFood(foodName, description, price, category, image)
-      .then(res => {
-        toast.success("Food Added")
-        fetchFood()
-        onClose()
-      }).catch(err => {
-        console.log(err)
-        setLoading(false) 
+    setLoading(true);
+  
+    const formData = new FormData();
+    formData.append("FoodName", foodName);
+    formData.append("Descriptions", description);
+    formData.append("Price", price);
+    formData.append("Category", category);
+    formData.append("Image", image);
+  
+    addFood(formData)
+      .then(() => {
+        toast.success("Food Added");
+        fetchFood();
+        onClose();
       })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.response?.data?.message || "Failed to add food");
+        setLoading(false);
+      });
   }
   
   return(
@@ -69,11 +79,10 @@ export default function AddFood({onClose, fetchFood}) {
         </label>
         <label className="flex flex-col gap-1">
           Select Image:
-          <input 
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            type="file" 
-            placeholder="Select Image"
+          <input
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
+            type="file"
+            accept="image/*"
             className="border px-2 py-2 rounded-sm bg-gray-300 text-center"
           />
         </label>

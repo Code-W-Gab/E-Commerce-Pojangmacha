@@ -20,7 +20,7 @@ export default function FoodList({ food }) {
           return(
             <div key={f._id} className="grid grid-cols-4 items-center text-center border border-gray-500 border-t-0 px-4 py-1">
               <div className="flex gap-20 items-center ">
-                <img src={noodles} className='size-10 rounded-sm'/>
+              <img src={f.Image} alt={f.FoodName} className="size-10 rounded-sm object-cover border border-gray-300" />
                 <p>{f.FoodName}</p>
               </div>
               <p>{f.Descriptions}</p>
