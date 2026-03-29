@@ -3,10 +3,12 @@ import { useState } from 'react';
 import DeleteFoodModal from './DeleteFoodModal';
 import { deleteFood } from '../../../service/foodService';
 import toast from 'react-hot-toast';
+import EditFood from './EditFood';
 
 
 export default function FoodList({ food, fetchFood }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUpdateFoodOpen, setIsUpdateFoodOpen] = useState(false);
   const [selectId, setSelectId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -58,6 +60,10 @@ export default function FoodList({ food, fetchFood }) {
                     <Trash2 size={20} className='text-red-500'/>
                   </button>
                   <button
+                    onClick={() => {
+                      setIsUpdateFoodOpen(true)
+                      setSelectId(f._id)
+                    }}
                     className='flex justify-center'>
                     <SquarePen size={20} className='text-green-500'/>
                   </button>
@@ -75,6 +81,14 @@ export default function FoodList({ food, fetchFood }) {
           </div>
         </div>
       )}
+
+      {isUpdateFoodOpen && (
+          <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center z-40">
+            <div className="bg-opacity-25 z-50">
+              <EditFood onClose={() => setIsUpdateFoodOpen(false)} fetchFood={fetchFood}/>
+            </div>
+          </div>
+        )}
 
       {/* Loading Overlay */}
       {loading && (
