@@ -52,6 +52,22 @@ const FoodController = {
     } catch (error) {
       next(error)
     }
+  },
+
+  async UpdateFood(req, res, next){
+    try {
+      const { id } = req.params;
+      const { FoodName, Price, Descriptions, Category, Image } = req.body
+      const updatedFood = await FoodSchema.findByIdAndUpdate(
+        id,
+        { FoodName, Price, Descriptions, Category, Image },
+        { new: true }
+      );
+      if (!updatedFood) return res.status(404).json({ message: "Food not found!"})
+      res.status(200).json(updatedFood)
+    } catch (error) {
+      next(error)
+    }
   }
 };
 
