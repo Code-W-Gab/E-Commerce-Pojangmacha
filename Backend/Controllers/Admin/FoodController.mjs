@@ -36,7 +36,7 @@ const FoodController = {
 
   async GetFoodById(req, res, next){
     try {
-      const food = await FoodSchema.findByIdAndUpdate(req.params.id);
+      const food = await FoodSchema.findById(req.params.id);
       if (!food) return res.status(400).json({ message: "Food not found!"})
       res.status(200).json(food)
     } catch (error) {
@@ -58,10 +58,22 @@ const FoodController = {
     try {
       const { id } = req.params;
       const { FoodName, Price, Descriptions, Category, Image } = req.body
+
+      let nextImage = Image;
+      if (req.file) {
+        nextImage = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+      }
+
       const updatedFood = await FoodSchema.findByIdAndUpdate(
         id,
-        { FoodName, Price, Descriptions, Category, Image },
-        { new: true }
+        {
+          FoodName,
+          Price,
+          Descriptions,
+          Category,
+          Image: nextImage,
+        },
+        { new: true, runValidators: true }
       );
       if (!updatedFood) return res.status(404).json({ message: "Food not found!"})
       res.status(200).json(updatedFood)

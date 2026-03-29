@@ -7,6 +7,6 @@ router.post("/addFood", upload.single("Image"), FoodController.AddFood);
 router.get("/getFood", FoodController.GetFood);
 router.get("/getFood/:id", FoodController.GetFoodById);
 router.delete("/deleteFood/:id", FoodController.DeleteFood);
-router.put("/updateFood/:id", FoodController.UpdateFood);
+router.put("/updateFood/:id", upload.single("Image"), FoodController.UpdateFood);
 
 export default router;
