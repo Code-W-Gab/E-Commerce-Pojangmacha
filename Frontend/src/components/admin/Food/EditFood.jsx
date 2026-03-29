@@ -1,14 +1,43 @@
-import { useState } from "react"
-import { addFood } from "../../../service/foodService";
+import { useEffect, useState } from "react"
+import { GetFoodById } from "../../../service/foodService";
 import toast from "react-hot-toast";
 
-export default function EditFood({onClose, fetchFood}) {
+export default function EditFood({onClose, fetchFood, foodId}) {
   const [foodName, setFoodName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    GetFoodById(foodId)
+      .then(res => {
+        setFoodName(res.data.FoodName)
+        setDescription(res.data.Descriptions)
+        setPrice(res.data.Price)
+        setCategory(res.data.Category)
+        setImageUrl(res.data.Image)
+      })
+      .catch(err => {
+        toast.error("Failed to fetch account.")
+        console.log(err)
+      })
+  }, [foodId])
+
+  useEffect(() => {
+    if (!imageFile) {
+      setPreviewUrl("");
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(imageFile);
+    setPreviewUrl(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [imageFile]);
   
   return(
     <div>
@@ -46,7 +75,7 @@ export default function EditFood({onClose, fetchFood}) {
         </label>
         <label className="flex flex-col gap-1 mb-3">
           Category:
-          <select onChange={(e) => setCategory(e.target.value)} className="border rounded-sm px-2 py-1">
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className="border rounded-sm px-2 py-1">
             <option value="KBowl">K-Bowl</option>
             <option value="Combo">Combo</option>
             <option value="Noodles">Noodles</option>
@@ -57,12 +86,22 @@ export default function EditFood({onClose, fetchFood}) {
         <label className="flex flex-col gap-1">
           Select Image:
           <input
-            onChange={(e) => setImage(e.target.files?.[0] || null)}
+            onChange={(e) => setImageFile(e.target.files?.[0] || null)}
             type="file"
             accept="image/*"
             className="border px-2 py-2 rounded-sm bg-gray-300 text-center"
           />
         </label>
+        {(previewUrl || imageUrl) && (
+          <div className="mt-3">
+            <p className="mb-1">Image Preview:</p>
+            <img
+              src={previewUrl || imageUrl}
+              alt="Food Preview"
+              className="size-20 object-cover rounded-sm border border-gray-400"
+            />
+          </div>
+        )}
         <div className="flex items-center gap-3 justify-end mt-6">
           <button 
             onClick={onClose}

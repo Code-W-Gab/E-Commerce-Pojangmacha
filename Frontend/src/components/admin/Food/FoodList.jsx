@@ -85,7 +85,7 @@ export default function FoodList({ food, fetchFood }) {
       {isUpdateFoodOpen && (
           <div className="fixed inset-0 flex bg-gray-800/50 items-center justify-center z-40">
             <div className="bg-opacity-25 z-50">
-              <EditFood onClose={() => setIsUpdateFoodOpen(false)} fetchFood={fetchFood}/>
+              <EditFood onClose={() => setIsUpdateFoodOpen(false)} fetchFood={fetchFood} foodId={selectId}/>
             </div>
           </div>
         )}
