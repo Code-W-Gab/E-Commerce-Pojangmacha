@@ -34,6 +34,16 @@ const FoodController = {
     }
   },
 
+  async GetFoodById(req, res, next){
+    try {
+      const food = await FoodSchema.findByIdAndUpdate(req.params.id);
+      if (!food) return res.status(400).json({ message: "Food not found!"})
+      res.status(200).json(food)
+    } catch (error) {
+      next(error)
+    }
+  },
+
   async DeleteFood(req, res, next){
     try {
       const food = await FoodSchema.findByIdAndDelete(req.params.id);
