@@ -10,3 +10,8 @@ export const GetFood = () => api.get("/api/food/getFood");
 export const GetFoodById = (id) => api.get(`/api/food/getFood/${id}`);
 
 export const deleteFood = (id) => api.delete(`/api/food/deleteFood/${id}`)
+
+export const updateFood = (id, formData) =>
+  api.put(`/api/food/updateFood/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });

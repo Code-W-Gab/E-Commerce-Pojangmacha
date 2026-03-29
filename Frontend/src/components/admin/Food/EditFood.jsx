@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { GetFoodById } from "../../../service/foodService";
+import { GetFoodById, updateFood } from "../../../service/foodService";
 import toast from "react-hot-toast";
 
 export default function EditFood({onClose, fetchFood, foodId}) {
@@ -11,6 +11,34 @@ export default function EditFood({onClose, fetchFood, foodId}) {
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);
+
+  function handleUpdateFood() {
+    setLoading(true)
+    const formData = new FormData();
+    formData.append("FoodName", foodName);
+    formData.append("Descriptions", description);
+    formData.append("Price", price);
+    formData.append("Category", category);
+
+    if (imageFile) {
+      formData.append("Image", imageFile);
+    } else {
+      formData.append("Image", imageUrl);
+    }
+
+    updateFood(foodId, formData)
+      .then(res => {
+        toast.success("Food Updated")
+        fetchFood()
+        setLoading(false)
+        onClose()
+      })
+      .catch(err => {
+        toast.error(err?.response?.data?.message || "Failed to update food")
+        setLoading(false)
+        console.log(err)
+      })
+  }
 
   useEffect(() => {
     GetFoodById(foodId)
@@ -110,6 +138,7 @@ export default function EditFood({onClose, fetchFood, foodId}) {
             Cancel
           </button>
           <button
+            onClick={handleUpdateFood}
             className="border border-orange-500 px-4 py-0.5 rounded-sm bg-orange-500 text-white"
           >
             Update
