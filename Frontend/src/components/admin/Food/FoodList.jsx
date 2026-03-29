@@ -1,4 +1,4 @@
-import { Trash2 } from 'lucide-react';
+import { Trash2, SquarePen } from 'lucide-react';
 import { useState } from 'react';
 import DeleteFoodModal from './DeleteFoodModal';
 import { deleteFood } from '../../../service/foodService';
@@ -48,14 +48,20 @@ export default function FoodList({ food, fetchFood }) {
                 </div>
                 <p>{f.Descriptions}</p>
                 <p>₱{f.Price}</p>
-                <button 
-                  onClick={() => {
-                    setIsDeleteModalOpen(true)
-                    setSelectId(f._id)
-                  }} 
-                  className='flex justify-center'>
-                  <Trash2 size={20} className='text-red-500'/>
-                </button>
+                <div className='flex items-center gap-3 justify-center'>
+                  <button 
+                    onClick={() => {
+                      setIsDeleteModalOpen(true)
+                      setSelectId(f._id)
+                    }} 
+                    className='flex justify-center'>
+                    <Trash2 size={20} className='text-red-500'/>
+                  </button>
+                  <button
+                    className='flex justify-center'>
+                    <SquarePen size={20} className='text-green-500'/>
+                  </button>
+                </div>
               </div>
             )
           })
