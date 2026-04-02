@@ -48,7 +48,7 @@ export default function FoodList({ food, fetchFood }) {
                 <img src={f.Image} alt={f.FoodName} className="size-10 rounded-sm object-cover border border-gray-300" />
                   <p>{f.FoodName}</p>
                 </div>
-                <p>{f.Descriptions}</p>
+                <p>{f.Category}</p>
                 <p>₱{f.Price}</p>
                 <div className='flex items-center gap-3 justify-center'>
                   <button 
