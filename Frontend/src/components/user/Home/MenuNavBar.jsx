@@ -5,14 +5,14 @@ import kbowl from '/navbar/bimbimbowl.jpg'
 import all from '/navbar/all.jpg'
 import addOns from '/navbar/addOns.jpg'
 
-export default function MenuNavBar() {
+export default function MenuNavBar({ activeCategory = "All", onSelectCategory }) {
   const nav = [
-    {title: "All", image: all},
-    {title: "K-Bowls", image: kbowl},
-    {title: "Combo", image: combo},
-    {title: "Noodles", image: noodles},
-    {title: "Drinks", image: drink},
-    {title: "Add Ons", image: addOns},
+    { title: "All", value: "All", image: all },
+    { title: "K-Bowls", value: "KBowl", image: kbowl },
+    { title: "Combo", value: "Combo", image: combo },
+    { title: "Noodles", value: "Noodles", image: noodles },
+    { title: "Drinks", value: "Drinks", image: drink },
+    { title: "Add Ons", value: "AddOns", image: addOns },
   ]
   return(
     <nav>
@@ -22,13 +22,23 @@ export default function MenuNavBar() {
       </div>
       <div className='flex items-center gap-12'>
         {nav.map((n) => {
+          const isActive = activeCategory === n.value
+
           return(
-            <div className='text-center ' key={n.title}>
+            <button
+              type='button'
+              onClick={() => onSelectCategory?.(n.value)}
+              className='text-center'
+              key={n.title}
+            >
               <div className='p-2  mb-2'>
-               <img src={n.image} className='size-18 rounded-full hover:border border-red-500'/>
+               <img
+                 src={n.image}
+                 className={`size-18 rounded-full border-2 ${isActive ? 'border-red-500' : 'border-transparent hover:border-red-500'}`}
+               />
               </div>
-              <p className='text-gray-500'>{n.title}</p>
-            </div>
+              <p className={isActive ? 'text-red-500 font-semibold' : 'text-gray-500'}>{n.title}</p>
+            </button>
           )
         })}
       </div>

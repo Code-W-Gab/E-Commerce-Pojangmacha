@@ -7,6 +7,7 @@ import { GetFood } from "../service/foodService";
 
 export default function HomePage() {
   const [food, setFood] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState("All")
 
   function fetchFood(){
     GetFood()
@@ -19,16 +20,23 @@ export default function HomePage() {
   useEffect(() => {
     fetchFood()
   }, [])
+
+  const filteredFood = selectedCategory === "All"
+    ? food
+    : food.filter((item) => item.Category === selectedCategory)
   
   return(
     <main className="py-4 px-50">
       <Header/>
       <div>
-        <MenuNavBar/>
+        <MenuNavBar
+          activeCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+        />
       </div>
       <div className="border-b-2 my-10 border-gray-400"></div>
       <div>
-        <Menu food={food}/>
+        <Menu food={filteredFood}/>
       </div>
     </main>
   )
