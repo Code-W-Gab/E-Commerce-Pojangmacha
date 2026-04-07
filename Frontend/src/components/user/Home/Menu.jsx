@@ -1,26 +1,8 @@
-import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
+import { useCart } from "../../../context/useCart"
 
 export default function Menu({ food }) {
-  const [quantities, setQuantities] = useState({})
-
-  function increase(id) {
-    setQuantities(prev => ({
-      ...prev,
-      [id]: (prev[id] || 0) + 1
-    }))
-  }
-
-  function decrease(id) {
-    setQuantities(prev => {
-      const current = prev[id] || 0
-      if (current <= 1) {
-        const { [id]: _, ...rest } = prev
-        return rest
-      }
-      return { ...prev, [id]: current - 1 }
-    })
-  }
+  const { addToCart, increaseQuantity, decreaseQuantity, getQuantity } = useCart()
 
   return (
     <menu>
@@ -32,7 +14,7 @@ export default function Menu({ food }) {
       ) : (
         <div className="grid grid-cols-4 items-center gap-10">
           {food.map((f) => {
-            const qty = quantities[f._id] || 0
+            const qty = getQuantity(f._id)
 
             return (
               <div key={f._id} className="bg-white shadow rounded-2xl">
@@ -40,16 +22,16 @@ export default function Menu({ food }) {
                   <img src={f.Image} className="h-50 w-full rounded-tl-2xl rounded-tr-2xl" />
                   <div className="absolute bottom-4 right-3 p-0.5 flex items-center bg-white rounded-full border border-white">
                     {qty === 0 ? (
-                      <button onClick={() => increase(f._id)}>
+                      <button onClick={() => addToCart(f)}>
                         <Plus size={20} />
                       </button>
                     ) : (
                       <div className="flex items-center justify-between gap-3">
-                        <button onClick={() => decrease(f._id)} className="bg-red-200 text-red-500 rounded-full p-0.5">
+                        <button onClick={() => decreaseQuantity(f._id)} className="bg-red-200 text-red-500 rounded-full p-0.5">
                           <Minus size={18} />
                         </button>
                         <p>{qty}</p>
-                        <button onClick={() => increase(f._id)} className="bg-green-200 text-green-500 rounded-full p-0.5">
+                        <button onClick={() => increaseQuantity(f._id)} className="bg-green-200 text-green-500 rounded-full p-0.5">
                           <Plus size={18} />
                         </button>
                       </div>
