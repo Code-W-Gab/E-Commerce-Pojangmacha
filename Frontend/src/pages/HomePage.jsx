@@ -3,6 +3,7 @@ import Header from "../components/common/Header";
 import Menu from "../components/user/Home/Menu";
 import MenuNavBar from "../components/user/Home/MenuNavBar";
 import { GetFood } from "../service/foodService";
+import ViewMenu from "../components/user/Home/VIewMenu";
 
 
 export default function HomePage() {
@@ -28,6 +29,9 @@ export default function HomePage() {
   return(
     <main className="py-4 px-50">
       <Header/>
+      <div>
+        <ViewMenu/>
+      </div>
       <div>
         <MenuNavBar
           activeCategory={selectedCategory}
